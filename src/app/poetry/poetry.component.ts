@@ -25,33 +25,62 @@ export class PoetryComponent {
   ) {}
 
   fetchByAuthorAndTitle(author: string, title: string): void {
-    this.poetryService.getAuthorAndTitle(author, title).subscribe({
-      next: data => {
-        this.authorPoems = data.authorData;
-        this.titlePoem = data.titleData;
+    this.errorMessage = undefined;
 
+    // Check if both fields are empty
+    if (!author && !title) {
+      this.errorMessage = 'Please enter at least an author or a title.';
+      this.loggingService.warn(this.errorMessage);
+      return;
+    }
+
+    // Fetch data based on available inputs
+    if (author && title) {
+      // Fetch both author and title data if both inputs are provided
+      this.poetryService.getAuthorAndTitle(author, title).subscribe({
+        next: data => {
+          this.authorPoems = data.authorData;
+          this.titlePoem = data.titleData;
+          this.loggingService.info('Author data retrieved', this.authorPoems);
+          this.loggingService.info('Title data retrieved', this.titlePoem);
+        },
+        error: err => {
+          this.errorMessage = err.message;
+          this.loggingService.error('Error fetching data', err);
+        }
+      });
+    } else if (author) {
+      this.fetchByAuthor(author);
+    } else if (title) {
+      this.fetchByTitle(title);
+    }
+  }
+
+  fetchByAuthor(author: string): void {
+    this.poetryService.getPoemsByAuthor(author).subscribe({
+      next: data => {
+        this.authorPoems = data;
         this.loggingService.info('Author data retrieved', this.authorPoems);
-        this.loggingService.info('Title data retrieved', this.titlePoem);
       },
       error: err => {
         this.errorMessage = err.message;
-        this.loggingService.error('Error fetching data', err);
+        this.loggingService.error('Error fetching author data', err);
       }
     });
   }
 
-  // fetchByAuthor(author: string): void {
-  //   this.poetryService.getPoemsByAuthor(author).subscribe({
-  //     next: data => this.authorPoems = data,
-  //     error: err => this.errorMessage = err.message
-  //   });
-  // }
-  //
-  // fetchByTitle(title: string): void {
-  //   this.poetryService.getPoemByTitle(title).subscribe({
-  //     next: data => this.titlePoem = data,
-  //     error: err => this.errorMessage = err.message
-  //   });
-  // }
+  fetchByTitle(title: string): void {
+    // Fetch only by title if author is empty
+    this.poetryService.getPoemByTitle(title).subscribe({
+      next: data => {
+        this.titlePoem = data;
+        this.loggingService.info('Title data retrieved', this.titlePoem);
+      },
+      error: err => {
+        this.errorMessage = err.message;
+        this.loggingService.error('Error fetching title data', err);
+      }
+    });
+  }
 
 }
