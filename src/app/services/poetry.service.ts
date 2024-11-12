@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import {forkJoin, Observable, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -19,6 +19,13 @@ export class PoetryService {
   getPoemByTitle(title: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/title/${title}`)
       .pipe(catchError(this.handleError));
+  }
+
+  getAuthorAndTitle(author: string, title: string): Observable<{ authorData: any; titleData: any }> {
+    const authorRequest = this.getPoemsByAuthor(author);
+    const titleRequest = this.getPoemByTitle(title);
+
+    return forkJoin({ authorData: authorRequest, titleData: titleRequest });
   }
 
   private handleError(error: HttpErrorResponse) {
