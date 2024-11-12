@@ -1,1 +1,21 @@
-<p>poetry works!</p>
+<div>
+  <h2>Fetch Poems by Author</h2>
+  <input type="text" #authorInput placeholder="Enter author name" />
+  <button (click)="fetchByAuthor(authorInput.value)">Fetch by Author</button>
+  <div *ngIf="authorPoems">
+    <h3>Poems by {{ authorInput.value }}:</h3>
+    <pre>{{ authorPoems | json }}</pre>
+  </div>
+
+  <h2>Fetch Poem by Title</h2>
+  <input type="text" #titleInput placeholder="Enter poem title" />
+  <button (click)="fetchByTitle(titleInput.value)">Fetch by Title</button>
+  <div *ngIf="titlePoem">
+    <h3>Poem titled "{{ titleInput.value }}":</h3>
+    <pre>{{ titlePoem | json }}</pre>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <p style="color: red;">Error: {{ errorMessage }}</p>
+  </div>
+</div>

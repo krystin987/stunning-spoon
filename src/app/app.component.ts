@@ -9,7 +9,7 @@ import { PoetryComponent } from './poetry/poetry.component';
   template: `
     <main>
       <header class="brand-name">
-        <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
+        <img class="brand-logo" src="/assets/poem-poetry-icon.svg" alt="logo" aria-hidden="true" width="50px" height="50px"/>
       </header>
       <section class="content">
         <app-poetry></app-poetry>
