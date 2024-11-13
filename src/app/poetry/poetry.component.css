@@ -1,0 +1,15 @@
+h3 {
+  color: #2a7fba; /* Style for author name */
+  font-weight: bold;
+}
+
+h4 {
+  color: #555; /* Style for poem title */
+  font-style: italic;
+}
+
+p {
+  color: #333; /* Style for poem text */
+  line-height: 1.6;
+  font-size: 1.1em;
+}

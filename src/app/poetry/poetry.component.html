@@ -4,14 +4,10 @@
   <input type="text" #titleInput placeholder="Enter poem title" />
   <button (click)="fetchByAuthorAndTitle(authorInput.value, titleInput.value)">Fetch by Author and Title</button>
 
-  <div *ngIf="authorPoems">
-    <h3>Poems by {{ authorInput.value }}:</h3>
-    <pre>{{ authorPoems | json }}</pre>
-  </div>
-
-  <div *ngIf="titlePoem">
-    <h3>Poem titled "{{ titleInput.value }}":</h3>
-    <pre>{{ titlePoem | json }}</pre>
+  <div *ngIf="authorName && poemTitle && poemText">
+    <h3>Poem by {{ authorName }}</h3>
+    <h4>{{ poemTitle }}</h4>
+    <p>{{ poemText }}</p>
   </div>
 
   <div *ngIf="errorMessage">

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { PoetryService } from '../services/poetry.service';
 import {JsonPipe, NgIf} from '@angular/common';
+
+import { PoetryService } from '../services/poetry.service';
 import { LoggingService } from '../services/logging.service';
+
+
 
 @Component({
   selector: 'app-poetry',
@@ -15,8 +18,9 @@ import { LoggingService } from '../services/logging.service';
 })
 
 export class PoetryComponent {
-  authorPoems: any;
-  titlePoem: any;
+  authorName: string | undefined;
+  poemTitle: string | undefined;
+  poemText: string | undefined;
   errorMessage: string | undefined;
 
   constructor(
@@ -39,10 +43,8 @@ export class PoetryComponent {
       // Fetch both author and title data if both inputs are provided
       this.poetryService.getAuthorAndTitle(author, title).subscribe({
         next: data => {
-          this.authorPoems = data.authorData;
-          this.titlePoem = data.titleData;
-          this.loggingService.info('Author data retrieved', this.authorPoems);
-          this.loggingService.info('Title data retrieved', this.titlePoem);
+          console.log(data)
+          this.parseAndSetData(data.authorData, data.titleData);
         },
         error: err => {
           this.errorMessage = err.message;
@@ -58,10 +60,7 @@ export class PoetryComponent {
 
   fetchByAuthor(author: string): void {
     this.poetryService.getPoemsByAuthor(author).subscribe({
-      next: data => {
-        this.authorPoems = data;
-        this.loggingService.info('Author data retrieved', this.authorPoems);
-      },
+      next: data => this.parseAndSetData(data),
       error: err => {
         this.errorMessage = err.message;
         this.loggingService.error('Error fetching author data', err);
@@ -72,10 +71,7 @@ export class PoetryComponent {
   fetchByTitle(title: string): void {
     // Fetch only by title if author is empty
     this.poetryService.getPoemByTitle(title).subscribe({
-      next: data => {
-        this.titlePoem = data;
-        this.loggingService.info('Title data retrieved', this.titlePoem);
-      },
+      next: data => this.parseAndSetData(data),
       error: err => {
         this.errorMessage = err.message;
         this.loggingService.error('Error fetching title data', err);
@@ -83,4 +79,15 @@ export class PoetryComponent {
     });
   }
 
+  private parseAndSetData(authorData?: any, titleData?: any): void {
+    const data = authorData || titleData;
+    if (data) {
+      this.authorName = data.author || 'Unknown Author';
+      this.poemTitle = data.title || 'Untitled';
+      this.poemText = data.lines || 'No text available';
+
+      // Log the parsed data
+      this.loggingService.info('Parsed Data:', {author: this.authorName, title: this.poemTitle, text: this.poemText});
+    }
+  }
 }
