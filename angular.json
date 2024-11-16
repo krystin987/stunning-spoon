@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "https://github.com/krystin987/stunning-spoon/pull/new/gh-pages-hosting\n",
             "outputPath": "dist/poetry",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -89,6 +90,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
