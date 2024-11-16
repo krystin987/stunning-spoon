@@ -1,13 +1,20 @@
-<div>
-  <h2>Fetch Poems by Author and Title</h2>
-  <input type="text" #authorInput placeholder="Enter author name" />
-  <input type="text" #titleInput placeholder="Enter poem title" />
-  <button (click)="fetchByAuthorAndTitle(authorInput.value, titleInput.value)">Fetch by Author and Title</button>
+<div class="poetry-component-div">
+  <div class="poetry-header">
+    <h2>Fetch Poems by Author and Title</h2>
+  </div>
+  <div class="input-container">
+    <input type="text" #authorInput placeholder="Enter author name" />
+    <input type="text" #titleInput placeholder="Enter poem title" />
+    <button (click)="fetchByAuthorAndTitle(authorInput.value, titleInput.value)">Fetch by Author and Title</button>
+  </div>
+<!--  </div>-->
 
-  <div *ngIf="authorName && poemTitle && poemText">
+  <div *ngIf="authorName && poemTitle && poemText" class="poetry-content">
     <h3>Poem by {{ authorName }}</h3>
     <h4>{{ poemTitle }}</h4>
-    <p>{{ poemText }}</p>
+    <div class="poem-text">
+      <p *ngFor="let line of poemText" class="poem-line">{{ line }}</p>
+    </div>
   </div>
 
   <div *ngIf="errorMessage">

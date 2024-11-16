@@ -1,5 +1,22 @@
+div.poetry-component-div {
+  width: 600px;
+  /*max-width: 600px; !* Optional: Limit content width *!*/
+  background: #4E4187; /* Optional: Set a background color for the content */
+  border-radius: 8px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
+  padding: 2rem; /* Optional: Add padding inside the content */
+}
+
+h2 {
+  width: 100%;
+}
+
+h3, h4 {
+  text-align: center;
+}
+
 h3 {
-  color: #2a7fba; /* Style for author name */
+  color: #00A7E1; /* Style for author name */
   font-weight: bold;
 }
 
@@ -8,8 +25,103 @@ h4 {
   font-style: italic;
 }
 
+input {
+  margin-bottom: .2rem;
+}
+
 p {
   color: #333; /* Style for poem text */
   line-height: 1.6;
   font-size: 1.1em;
+  margin: 0;
+  padding: 0;
+}
+
+.poetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  /*position: sticky; !* Keeps the header fixed at the top of the container *!*/
+  top: 0;
+  z-index: 10;
+  color: #ffffff;
+  background-color: #4E4187;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  /*width: auto;*/
+}
+
+.input-container button {
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: #00A7E1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+  background-color: #1a5d87; /* Darker shade on hover */
+}
+
+
+/* Search box styling */
+.input-container input[type="text"] {
+  padding: 0.8rem; /* Add padding inside the input */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 1rem;
+  margin-left: 1rem; /* Space between the title and input */
+  width: 60%; /* Adjust width as necessary */
+  background-color: #f4f4f4; /* Light background */
+  color: #333; /* Text color */
+  outline: none; /* Removes the default outline */
+  transition: border-color 0.3s ease; /* Smooth transition on focus */
+}
+
+/* Change border color on focus */
+.input-container input[type="text"]:focus {
+  border-color: #1a5d87; /* Darker border on focus */
+  background-color: white; /* Make background white when focused */
+}
+
+.input-container input[type="text"]::placeholder {
+  color: #aaa; /* Lighter color for placeholder */
+  font-style: italic; /* Make placeholder italic */
+}
+
+.input-container input, button {
+  margin-top: 1rem;
+}
+
+.poetry-content {
+  flex: 1; /* Fills the remaining space below the header */
+  overflow-y: auto; /* Enables vertical scrolling */
+  padding: 1rem;
+  margin-top: 1rem;
+  background-color: #f9f9f9; /* Light background for content */
+  color: #333; /* Content text color */
+  line-height: 1.6;
+  border-radius: 8px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
+}
+
+.poem-text {
+  color: #FFEAEC;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.poem-line {
+  margin: 0.5rem 0;
+  position: relative;
+  padding-bottom: 1rem; /* Space for the decoration */
 }

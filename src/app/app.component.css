@@ -1,0 +1,76 @@
+:host {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh; /* Full viewport height */
+  background-color: #ffeaec; /* Optional: Set a light background */
+  padding: 1rem; /* Optional: Add some spacing */
+  box-sizing: border-box; /* Ensure padding is accounted for in dimensions */
+}
+
+/* Style for the header */
+.app-header {
+  background-color: #00A7E1; /* Primary background color */
+  color: #ffffff; /* Text color */
+  padding: 1rem 2rem; /* Spacing around the header */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Container for the logo and text */
+.header-container {
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Vertically center items */
+  max-width: 1200px; /* Constrain width */
+  margin: 0 auto; /* Center content horizontally */
+}
+
+/* Logo styles */
+.app-logo {
+  width: 50px; /* Set logo width */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 1rem; /* Add space between logo and text */
+  filter: invert(1); /* Make the logo white (if it's dark) */
+}
+
+/* App title */
+.app-title {
+  font-size: 2.5rem; /* Large text size for title */
+  margin: 0; /* Remove default margins */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+/* App tagline */
+.app-tagline {
+  font-size: 1.2rem; /* Smaller size for tagline */
+  margin: 0.25rem 0 0; /* Space between title and tagline */
+  font-style: italic; /* Italic for differentiation */
+}
+
+/* Text container */
+.header-text {
+  display: flex;
+  flex-direction: column; /* Stack title and tagline vertically */
+  align-items: center;
+}
+
+.main {
+  position: fixed; /* Fixes the background to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .app-title {
+    font-size: 1.8rem; /* Adjust for smaller screens */
+  }
+  .app-tagline {
+    font-size: 1rem; /* Adjust tagline size */
+  }
+  .app-logo {
+    width: 40px; /* Slightly smaller logo */
+  }
+}

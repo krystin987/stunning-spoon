@@ -8,8 +8,15 @@ import { PoetryComponent } from './poetry/poetry.component';
   imports: [RouterOutlet, PoetryComponent],
   template: `
     <main>
-      <header class="brand-name">
-        <img class="brand-logo" src="/assets/poem-poetry-icon.svg" alt="logo" aria-hidden="true" width="50px" height="50px"/>
+      <header class="app-header">
+        <div class="header-container">
+          <img class="brand-logo" src="/assets/poem-poetry-icon.svg" alt="logo" aria-hidden="true" width="50px" height="50px"/>
+          <div class="header-text">
+            <h1 class="app-title">Poetry Viewer</h1>
+            <p class="app-tagline">Discover and explore timeless poetry</p>
+
+          </div>
+        </div>
       </header>
       <section class="content">
         <app-poetry></app-poetry>

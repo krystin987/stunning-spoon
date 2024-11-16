@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {JsonPipe, NgIf} from '@angular/common';
+import {JsonPipe, NgForOf, NgIf} from '@angular/common';
 
 import { PoetryService } from '../services/poetry.service';
 import { LoggingService } from '../services/logging.service';
@@ -11,7 +11,8 @@ import { LoggingService } from '../services/logging.service';
   standalone: true,
   imports: [
     NgIf,
-    JsonPipe
+    JsonPipe,
+    NgForOf
   ],
   templateUrl: './poetry.component.html',
   styleUrl: './poetry.component.css'
@@ -20,7 +21,7 @@ import { LoggingService } from '../services/logging.service';
 export class PoetryComponent {
   authorName: string | undefined;
   poemTitle: string | undefined;
-  poemText: string | undefined;
+  poemText: string[] | undefined;
   errorMessage: string | undefined;
 
   constructor(
@@ -43,8 +44,8 @@ export class PoetryComponent {
       // Fetch both author and title data if both inputs are provided
       this.poetryService.getAuthorAndTitle(author, title).subscribe({
         next: data => {
-          console.log(data)
-          this.parseAndSetData(data.authorData, data.titleData);
+          // select the first result, this should be refined in the future
+          this.parseAndSetData(data.authorData[0], data.titleData[0]);
         },
         error: err => {
           this.errorMessage = err.message;
@@ -84,10 +85,14 @@ export class PoetryComponent {
     if (data) {
       this.authorName = data.author || 'Unknown Author';
       this.poemTitle = data.title || 'Untitled';
-      this.poemText = data.lines || 'No text available';
+      this.poemText = data.lines || [];
 
       // Log the parsed data
-      this.loggingService.info('Parsed Data:', {author: this.authorName, title: this.poemTitle, text: this.poemText});
+      this.loggingService.info('Parsed Data:', {
+        author: this.authorName,
+        title: this.poemTitle,
+        text: this.poemText
+      });
     }
   }
 }
