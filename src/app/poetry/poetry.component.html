@@ -1,41 +1,37 @@
-<div class="poetry-component-div">
+<div class="poetry-component">
 
-  <!--  Header-->
-  <div class="poetry-header">
+  <!-- Header-->
+  <header class="poetry-header">
     <h2>Fetch Poems by Author and Title</h2>
-  </div>
+  </header>
 
   <!-- Search Box -->
-  <div *ngIf="!selectedPoem && !isSelectionActive" class="search-view input-container">
+  <section *ngIf="!selectedPoem && !isSelectionActive" class="search-view">
     <h1>Search for a Poem</h1>
     <input type="text" [(ngModel)]="authorName" placeholder="Enter author name" />
     <input type="text" [(ngModel)]="poemTitle" placeholder="Enter poem title" />
     <button (click)="fetchByAuthorAndTitle(authorName, poemTitle)">Fetch by Author and Title</button>
     <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
-  </div>
+  </section>
 
-  <!--  poem selection-->
-  <div *ngIf="isSelectionActive" class="selection-view">
+  <!-- Poem Selection-->
+  <section *ngIf="isSelectionActive" class="selection-view">
     <h2>Select a Poem:</h2>
     <ul>
       <li *ngFor="let poem of poems" (click)="selectPoem(poem)">
         <strong>{{ poem.title }}</strong> by {{ poem.author }}
       </li>
     </ul>
-  </div>
+  </section>
 
-  <!-- Selected Poem View -->
-  <div *ngIf="selectedPoem" class="poem-view">
+  <!-- Poem View -->
+  <section *ngIf="selectedPoem" class="poem-view">
     <button (click)="clearSelection()">← Back</button>
     <h2>{{ poemTitle }}</h2>
     <h3>by {{ authorName }}</h3>
     <div class="poem-content">
-      <p *ngFor="let line of poemText">{{ line }}</p>
+      <p *ngFor="let line of poemText" class="poem-line">{{ line }}</p>
     </div>
-</div>
-
-  <div *ngIf="errorMessage">
-    <p style="color: red;">Error: {{ errorMessage }}</p>
-  </div>
+</section>
 
 </div>
