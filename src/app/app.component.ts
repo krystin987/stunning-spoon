@@ -11,8 +11,8 @@ import {NgOptimizedImage} from '@angular/common';
     <main>
       <header class="app-header">
         <div class="header-container">
-          <img class="brand-logo" src="/assets/poem-poetry-icon.svg" alt="logo" aria-hidden="true" width="50px"
-               height="50px"/>
+<!--          <img class="brand-logo" src="/assets/poem-poetry-icon.svg" alt="logo" aria-hidden="true" width="50px"-->
+<!--               height="50px"/>-->
           <div class="header-text">
             <h1 class="app-title">Poetry Viewer</h1>
             <p class="app-tagline">Discover and explore timeless poetry</p>
