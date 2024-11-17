@@ -6,7 +6,7 @@
   </div>
 
   <!-- Search Box -->
-  <div *ngIf="!selectedPoem && !isSelectionActive" class="search-view">
+  <div *ngIf="!selectedPoem && !isSelectionActive" class="search-view input-container">
     <h1>Search for a Poem</h1>
     <input type="text" [(ngModel)]="authorName" placeholder="Enter author name" />
     <input type="text" [(ngModel)]="poemTitle" placeholder="Enter poem title" />

@@ -126,12 +126,6 @@ p {
   padding-bottom: 1rem; /* Space for the decoration */
 }
 
-.search-view, .selection-view, .poem-view {
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-}
-
 .selection-view ul {
   list-style: none;
   padding: 0;
@@ -154,6 +148,10 @@ p {
   margin-top: 1rem;
   text-align: justify;
   line-height: 1.6;
+}
+
+.poem-content p {
+  color: white;
 }
 
 .error-message {
