@@ -1,129 +1,76 @@
-div.poetry-component-div {
-  width: 600px;
-  /*max-width: 600px; !* Optional: Limit content width *!*/
-  background: #4E4187; /* Optional: Set a background color for the content */
-  border-radius: 8px; /* Optional: Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
-  padding: 2rem; /* Optional: Add padding inside the content */
-}
-
-h2 {
-  width: 100%;
-}
-
-h3, h4 {
-  text-align: center;
-}
-
-h3 {
-  color: #00A7E1; /* Style for author name */
-  font-weight: bold;
-}
-
-h4 {
-  color: #555; /* Style for poem title */
-  font-style: italic;
-}
-
-input {
-  margin-bottom: .2rem;
-}
-
-p {
-  color: #333; /* Style for poem text */
-  line-height: 1.6;
-  font-size: 1.1em;
-  margin: 0;
-  padding: 0;
-}
-
-.poetry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  /*position: sticky; !* Keeps the header fixed at the top of the container *!*/
-  top: 0;
-  z-index: 10;
-  color: #ffffff;
-  background-color: #4E4187;
-}
-
-.input-container {
+.poetry-component {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background: #4E4187;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
   margin: auto;
-  /*width: auto;*/
+  color: white;
+  width: 100%;
+  max-width: 800px;
+  min-width: 500px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: width 0.3s ease;
 }
 
-.input-container button {
+/* Header */
+header h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/*input & button */
+input[type="text"], button {
   padding: 0.8rem;
   font-size: 1rem;
-  background-color: #00A7E1;
-  color: white;
-  border: none;
   border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin: 1rem 0;
 }
 
-.input-container button:hover {
-  background-color: #1a5d87; /* Darker shade on hover */
+input[type="text"] {
+  border: none;
+  width: calc(100% - 2rem);
+  background: #f4f4f4;
+  color: #333;
 }
 
-
-/* Search box styling */
-.input-container input[type="text"] {
-  padding: 0.8rem; /* Add padding inside the input */
-  border-radius: 8px; /* Rounded corners */
-  font-size: 1rem;
-  margin-left: 1rem; /* Space between the title and input */
-  width: 60%; /* Adjust width as necessary */
-  background-color: #f4f4f4; /* Light background */
-  color: #333; /* Text color */
-  outline: none; /* Removes the default outline */
-  transition: border-color 0.3s ease; /* Smooth transition on focus */
+input[type="text"]:focus {
+  outline: 2px solid #1a5d87;
 }
 
-/* Change border color on focus */
-.input-container input[type="text"]:focus {
-  border-color: #1a5d87; /* Darker border on focus */
-  background-color: white; /* Make background white when focused */
-}
-
-.input-container input[type="text"]::placeholder {
+input[type="text"]::placeholder {
   color: #aaa; /* Lighter color for placeholder */
   font-style: italic; /* Make placeholder italic */
 }
 
-.input-container input, button {
-  margin-top: 1rem;
+button {
+  background-color: #00A7E1;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #1a5d87;
 }
 
-.poetry-content {
-  flex: 1; /* Fills the remaining space below the header */
-  overflow-y: auto; /* Enables vertical scrolling */
-  padding: 1rem;
-  margin-top: 1rem;
-  background-color: #f9f9f9; /* Light background for content */
-  color: #333; /* Content text color */
-  line-height: 1.6;
-  border-radius: 8px; /* Optional: Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
+/*sections*/
+
+section {
+  margin: 1rem 0;
 }
 
-.poem-text {
-  color: #FFEAEC;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  text-align: justify;
+.error-message {
+  color: red;
 }
 
 .poem-line {
   margin: 0.5rem 0;
   position: relative;
-  padding-bottom: 1rem; /* Space for the decoration */
+  padding-bottom: 1rem;
 }
 
 .selection-view ul {
@@ -132,29 +79,41 @@ p {
 }
 
 .selection-view li {
-  margin: 0.5rem 0;
   padding: 0.8rem;
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
+  background: #1a5d87;
   border-radius: 4px;
   cursor: pointer;
+  margin: 0.5rem 0;
+  transition: background-color 0.3s ease;
 }
 
 .selection-view li:hover {
   background-color: #e0e0e0;
 }
 
-.poem-view .poem-content {
-  margin-top: 1rem;
-  text-align: justify;
-  line-height: 1.6;
-}
-
+/*poems*/
 .poem-content p {
-  color: white;
+  margin: 0.5rem 0;
+  text-align: justify;
 }
 
-.error-message {
-  color: red;
-  margin-top: 1rem;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .poetry-component {
+    padding: 1rem;
+  }
+
+  input[type="text"],
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  input[type="text"],
+  button {
+    font-size: 0.8rem;
+  }
+
 }

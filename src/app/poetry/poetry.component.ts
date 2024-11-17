@@ -47,9 +47,12 @@ export class PoetryComponent {
     // Fetch data based on available inputs
     if (author && title) {
       // Fetch both author and title data if both inputs are provided
-      this.poetryService.getAuthorAndTitle(author, title).subscribe({
+      this.poetryService.getPoemsByAuthor(author).subscribe({
         next: data => {
-          this.poems = data.authorData.concat(data.titleData); // Combine author and title results
+          // Filter by title on the client side
+          this.poems = data.filter((poem: any) =>
+            poem.title.toLowerCase() === title.toLowerCase()
+          );
           this.handlePoemResults();
         },
         error: err => {
