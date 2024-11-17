@@ -3,6 +3,7 @@ import {JsonPipe, NgForOf, NgIf} from '@angular/common';
 
 import { PoetryService } from '../services/poetry.service';
 import { LoggingService } from '../services/logging.service';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { LoggingService } from '../services/logging.service';
   imports: [
     NgIf,
     JsonPipe,
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './poetry.component.html',
   styleUrl: './poetry.component.css'
@@ -23,13 +25,16 @@ export class PoetryComponent {
   poemTitle: string | undefined;
   poemText: string[] | undefined;
   errorMessage: string | undefined;
+  poems: any[] = []; // Store all poems fetched from the API
+  selectedPoem: any = null; // Store the selected poem
+  isSelectionActive: boolean = false; // Flag to toggle selection list
 
   constructor(
     private poetryService: PoetryService,
     private loggingService: LoggingService
   ) {}
 
-  fetchByAuthorAndTitle(author: string, title: string): void {
+  fetchByAuthorAndTitle(author: string | undefined, title: string | undefined): void {
     this.errorMessage = undefined;
 
     // Check if both fields are empty
@@ -44,8 +49,8 @@ export class PoetryComponent {
       // Fetch both author and title data if both inputs are provided
       this.poetryService.getAuthorAndTitle(author, title).subscribe({
         next: data => {
-          // select the first result, this should be refined in the future
-          this.parseAndSetData(data.authorData[0], data.titleData[0]);
+          this.poems = data.authorData.concat(data.titleData); // Combine author and title results
+          this.handlePoemResults();
         },
         error: err => {
           this.errorMessage = err.message;
@@ -61,7 +66,10 @@ export class PoetryComponent {
 
   fetchByAuthor(author: string): void {
     this.poetryService.getPoemsByAuthor(author).subscribe({
-      next: data => this.parseAndSetData(data),
+      next: data => {
+        this.poems = data;
+        this.handlePoemResults();
+      },
       error: err => {
         this.errorMessage = err.message;
         this.loggingService.error('Error fetching author data', err);
@@ -72,7 +80,10 @@ export class PoetryComponent {
   fetchByTitle(title: string): void {
     // Fetch only by title if author is empty
     this.poetryService.getPoemByTitle(title).subscribe({
-      next: data => this.parseAndSetData(data),
+      next: data => {
+        this.poems = data;
+        this.handlePoemResults();
+      },
       error: err => {
         this.errorMessage = err.message;
         this.loggingService.error('Error fetching title data', err);
@@ -80,19 +91,33 @@ export class PoetryComponent {
     });
   }
 
-  private parseAndSetData(authorData?: any, titleData?: any): void {
-    const data = authorData || titleData;
-    if (data) {
-      this.authorName = data.author || 'Unknown Author';
-      this.poemTitle = data.title || 'Untitled';
-      this.poemText = data.lines || [];
-
-      // Log the parsed data
-      this.loggingService.info('Parsed Data:', {
-        author: this.authorName,
-        title: this.poemTitle,
-        text: this.poemText
-      });
+  private handlePoemResults(): void {
+    if (this.poems.length === 1) {
+      // Auto-select if only one result
+      this.selectPoem(this.poems[0]);
+    } else if (this.poems.length > 1) {
+      // Activate selection mode for multiple results
+      this.isSelectionActive = true;
+    } else {
+      this.errorMessage = 'No poems found.';
+      this.loggingService.warn(this.errorMessage);
     }
   }
+
+  selectPoem(poem: any): void {
+    this.selectedPoem = poem;
+    this.authorName = poem.author;
+    this.poemTitle = poem.title;
+    this.poemText = poem.lines;
+
+    this.isSelectionActive = false; // Exit selection mode
+    this.loggingService.info('Poem selected:', poem);
+  }
+
+  clearSelection(): void {
+    this.selectedPoem = null;
+    this.poems = [];
+    this.isSelectionActive = false;
+  }
+
 }

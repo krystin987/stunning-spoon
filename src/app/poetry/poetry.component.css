@@ -125,3 +125,38 @@ p {
   position: relative;
   padding-bottom: 1rem; /* Space for the decoration */
 }
+
+.search-view, .selection-view, .poem-view {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.selection-view ul {
+  list-style: none;
+  padding: 0;
+}
+
+.selection-view li {
+  margin: 0.5rem 0;
+  padding: 0.8rem;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selection-view li:hover {
+  background-color: #e0e0e0;
+}
+
+.poem-view .poem-content {
+  margin-top: 1rem;
+  text-align: justify;
+  line-height: 1.6;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+}
