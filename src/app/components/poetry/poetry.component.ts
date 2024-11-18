@@ -53,15 +53,15 @@ export class PoetryComponent {
     this.selectedPoem = poem;
   }
 
-  onPoemSelected(poem: Poem): void {
-    this.selectedPoem = poem;
-    this.router.navigate(['/poem', poem.id]); // Navigate to poem details
-  }
-
-  goBackToSearch(): void {
-    this.isSearchView = true;
-    this.selectedPoem = null;
-    this.poems = [];
+  handleBack(): void {
+    if (this.selectedPoem) {
+      // If viewing poem details, go back to the poems list
+      this.selectedPoem = null;
+    } else {
+      // If viewing poems list, go back to the search view
+      this.isSearchView = true;
+      this.poems = [];
+    }
   }
 
 }

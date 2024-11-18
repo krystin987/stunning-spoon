@@ -4,9 +4,9 @@
   <header class="poetry-header">
     <h2>Fetch Poems by Author or Title</h2>
   </header>
-
+<!--  back button for search view-->
   <section *ngIf="!isSearchView">
-    <button (click)="goBackToSearch()">Back</button>
+    <button (click)="handleBack()">Back</button>
   </section>
 
   <!-- Search Box -->
@@ -16,13 +16,13 @@
   </section>
 
   <!-- Poem Selection-->
-  <section *ngIf="!selectedPoem" class="poem-view">
+  <section *ngIf="!selectedPoem && !isSearchView" class="poem-view">
     <app-poetry-list [poems]="poems" (selectPoem)="selectPoem($event)"></app-poetry-list>
   </section>
 
   <!-- Poem View -->
   <section *ngIf="selectedPoem" class="poem-view">
-    <app-poem-detail [poem]="selectedPoem"></app-poem-detail>
+    <app-poem-detail [poem]="selectedPoem">></app-poem-detail>
   </section>
 
 </div>
