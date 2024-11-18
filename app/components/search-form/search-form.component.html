@@ -1,0 +1,15 @@
+<div class="search-form">
+  <input
+    type="text"
+    [(ngModel)]="authorName"
+    placeholder="Search by author"
+    (keyup.enter)="triggerSearch()"
+  />
+  <input
+    type="text"
+    [(ngModel)]="poemTitle"
+    placeholder="Search by title"
+    (keyup.enter)="triggerSearch()"
+  />
+  <button (click)="triggerSearch()">Search</button>
+</div>
