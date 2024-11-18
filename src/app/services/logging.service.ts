@@ -27,9 +27,4 @@ export class LoggingService {
     }
   }
 
-  // Additional method to send logs to an external server (optional)
-  sendLogToServer(level: string, message: string, data?: any): void {
-    // Implement an HTTP call to send log data to a server
-    // e.g., this.http.post('https://logging-server.com/log', { level, message, data });
-  }
 }

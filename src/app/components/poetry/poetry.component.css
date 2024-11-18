@@ -22,41 +22,6 @@ header h2 {
   font-size: 1.5rem;
 }
 
-/*input & button */
-input[type="text"], button {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-input[type="text"] {
-  border: none;
-  width: calc(100% - 2rem);
-  background: #f4f4f4;
-  color: #333;
-}
-
-input[type="text"]:focus {
-  outline: 2px solid #1a5d87;
-}
-
-input[type="text"]::placeholder {
-  color: #aaa; /* Lighter color for placeholder */
-  font-style: italic; /* Make placeholder italic */
-}
-
-button {
-  background-color: #00A7E1;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-button:hover {
-  background-color: #1a5d87;
-}
-
 /*sections*/
 
 section {
