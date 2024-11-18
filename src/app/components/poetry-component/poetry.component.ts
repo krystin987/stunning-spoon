@@ -28,9 +28,7 @@ export class PoetryComponent {
   errorMessage: string | undefined;
   poems: Poem[] = [];
   selectedPoem: any = null; // Store the selected poem
-  isSelectionActive: boolean = false; // Flag to toggle selection list
   isSearchView: boolean = true;
-  private router: any;
 
   constructor(
     private poetryService: PoetryService,
@@ -38,10 +36,22 @@ export class PoetryComponent {
   ) {}
 
   fetchByAuthorAndTitle(author: string, title: string): void {
+    this.errorMessage = undefined; // clear any previous error, if there exist more in the future
+
+    if (!author && !title) {
+      this.errorMessage = 'Please enter at least an author or a title.';
+      this.loggingService.warn(this.errorMessage);
+      return;
+    }
+
     this.poetryService.getPoems(author, title).subscribe({
       next: (data: Poem[]) => {
-        this.poems = data;
-        this.isSearchView = false;
+        if (data.length > 0) {
+          this.poems = data;
+          this.isSearchView = false; // Switch to the list view
+        } else {
+          this.errorMessage = 'No poems found matching your search. Please try again.';
+        }
       },
       error: (err: String) => {
         this.loggingService.error('Error fetching data', err);

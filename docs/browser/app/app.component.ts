@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PoetryComponent } from './components/poetry/poetry.component';
+import { PoetryComponent } from './components/poetry-component/poetry.component';
 import {NgOptimizedImage} from '@angular/common';
 
 @Component({

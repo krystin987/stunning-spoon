@@ -4,6 +4,12 @@
   <header class="poetry-header">
     <h2>Fetch Poems by Author or Title</h2>
   </header>
+
+<!--  error message -->
+  <section *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </section>
+
 <!--  back button for search view-->
   <section *ngIf="!isSearchView">
     <button (click)="handleBack()">Back</button>

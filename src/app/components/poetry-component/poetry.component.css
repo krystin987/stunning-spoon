@@ -29,7 +29,9 @@ section {
 }
 
 .error-message {
-  color: red;
+  color: #ECC30B;
+  font-size: 1.3rem;
+  height: 1vh;
 }
 
 .poem-line {
