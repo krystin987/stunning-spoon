@@ -1,0 +1,7 @@
+<section class="selection-view">
+  <ul>
+    <li *ngFor="let poem of poems" (click)="selectPoem.emit(poem)">
+      {{ poem.title }} by {{ poem.author }}
+    </li>
+  </ul>
+</section>
