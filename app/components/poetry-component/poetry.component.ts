@@ -50,15 +50,20 @@ export class PoetryComponent implements OnInit {
     }
 
     this.poetryService.getPoems(author, title).subscribe({
-      next: (data: Poem[]) => {
-        if (data.length > 0) {
+      next: (data: Poem[] | null) => {
+        if (data && Array.isArray(data) && data.length > 0) {
           this.poems = data;
+          this.errorMessage = '';
           this.stateService.setIsSearchView(false);
         } else {
+          this.poems = [];
           this.errorMessage = 'No poems found matching your search. Please try again.';
+          this.loggingService.warn(this.errorMessage);
         }
       },
       error: (err: String) => {
+        this.errorMessage = 'Error fetching data. Please try again later.';
+        this.poems = [];
         this.loggingService.error('Error fetching data', err);
       },
     });

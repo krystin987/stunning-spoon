@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {forkJoin, map, Observable, throwError} from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {forkJoin, map, Observable, throwError, catchError} from 'rxjs';
 import {Poem} from '../models/poem';
 
 @Injectable({
@@ -21,25 +20,34 @@ export class PoetryService {
     if (author && title) {
       // Fetch both author and title and filter the results
       return forkJoin({
-        authorData: this.http.get<Poem[]>(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError)),
-        titleData: this.http.get<Poem[]>(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError))
+        authorData: this.http.get<Poem[] | { status: number; reason: string }>(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError)),
+        titleData: this.http.get<Poem[] | { status: number; reason: string }>(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError))
       }).pipe(
         map(results => {
-          const authorData = results.authorData;
-          const titleData = results.titleData;
+          const { authorData, titleData } = results;
+          const isAuthorDataValid = Array.isArray(authorData);
+          const isTitleDataValid = Array.isArray(titleData);
 
-          // Filter poems that match both author and title
-          return titleData.filter(poem =>
-            authorData.some(authorPoem => authorPoem.title === poem.title)
-          );
-        })
+          if (isAuthorDataValid && isTitleDataValid) {
+            // Filter poems that match both author and title
+            return titleData.filter(poem =>
+              authorData.some(authorPoem => authorPoem.title === poem.title)
+            );
+          } else if (!isAuthorDataValid && !isTitleDataValid) {
+            return [];
+          } else {
+            // Return only the valid data or an empty array if neither is valid
+            return isAuthorDataValid ? authorData : isTitleDataValid ? titleData : [];
+          }
+        }),
+        catchError(this.handleError)
       );
     } else if (author) {
       // Fetch by author only
-      return this.http.get(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError));
+      return this.http.get<Poem[] | { status: number; reason: string }>(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError));
     } else {
       // Fetch by title only
-      return this.http.get(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError));
+      return this.http.get<Poem[] | { status: number; reason: string }>(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError));
     }
   }
 
