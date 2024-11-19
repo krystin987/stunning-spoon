@@ -1,0 +1,7 @@
+<div class="poem-detail" *ngIf="poem">
+  <h2>{{ poem.title }}</h2>
+  <h3>By {{ poem.author }}</h3>
+  <section class="poem-section">
+    <p class="poem-line" *ngFor="let line of poem.lines" >{{ line }}</p>
+  </section>
+</div>
