@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
   imports: [
     FormsModule
   ],
-  styleUrl: './search-form.component.css'
+  styleUrls: ['./search-form.component.css', '../../assets/styles/shared.css']
 })
 
 export class SearchFormComponent {

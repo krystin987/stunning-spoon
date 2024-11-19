@@ -21,7 +21,7 @@ import {PoemDetailComponent} from '../poem-detail/poem-detail.component';
     PoemDetailComponent
   ],
   templateUrl: './poetry.component.html',
-  styleUrl: './poetry.component.css'
+  styleUrls:  ['./poetry.component.css', '../../assets/styles/shared.css']
 })
 
 export class PoetryComponent {
@@ -36,7 +36,10 @@ export class PoetryComponent {
   ) {}
 
   fetchByAuthorAndTitle(author: string, title: string): void {
-    this.errorMessage = undefined; // clear any previous error, if there exist more in the future
+    this.errorMessage = ''; // clear any previous error, if there exist more in the future
+
+    author = author ? author.trim().replace(/[^a-zA-Z0-9\s]/g, '') : '';
+    title = title ? title.trim().replace(/[^a-zA-Z0-9\s]/g, '') : '';
 
     if (!author && !title) {
       this.errorMessage = 'Please enter at least an author or a title.';

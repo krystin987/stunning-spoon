@@ -18,16 +18,19 @@ export class PoetryService {
     }
 
     if (author && title) {
-      // Fetch both author and title
+      // Fetch both author and title and filter the results
       return forkJoin({
-        authorData: this.http.get(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError)),
-        titleData: this.http.get(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError))
+        authorData: this.http.get<Poem[]>(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError)),
+        titleData: this.http.get<Poem[]>(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError))
       }).pipe(
         map(results => {
-          // Combine results from both calls
-          const authorData = results.authorData as any[];
-          const titleData = results.titleData as any[];
-          return [...new Set([...authorData, ...titleData])]; // Avoid duplicates
+          const authorData = results.authorData;
+          const titleData = results.titleData;
+
+          // Filter poems that match both author and title
+          return titleData.filter(poem =>
+            authorData.some(authorPoem => authorPoem.title === poem.title)
+          );
         })
       );
     } else if (author) {
