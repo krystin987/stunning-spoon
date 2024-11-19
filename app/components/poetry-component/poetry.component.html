@@ -1,27 +1,19 @@
 <div class="poetry-component">
 
-  <!-- Header-->
-  <header class="poetry-header">
-    <h2>Fetch Poems by Author or Title</h2>
-  </header>
+  <!-- Back button container appears when not in search view -->
+  <div class="back-button-container" *ngIf="!isSearchView">
+    <button (click)="handleBack()">Back</button>
+  </div>
 
-  <!-- Message Section: Back button, Error Message, or Search prompt -->
+<!--  search text or error-->
   <section class="message-section">
-    <ng-container *ngIf="!isSearchView">
-      <!-- Back button container appears when not in search view -->
-      <div class="back-button-container">
-        <button (click)="handleBack()">Back</button>
-      </div>
-    </ng-container>
-
     <ng-container *ngIf="errorMessage?.trim()">
-      <!-- Show error message if both author and title are empty -->
       <p class="error-message">{{ errorMessage }}</p>
     </ng-container>
 
     <ng-container *ngIf="isSearchView && !errorMessage?.trim()">
       <!-- Default search prompt when no error and search view is active -->
-      <h1 class="search-message">Search by Poem or Poet or both:</h1>
+      <h1 class="search-message">Search by poem or poet or both:</h1>
     </ng-container>
   </section>
 
@@ -30,13 +22,13 @@
     <app-search-form (search)="fetchByAuthorAndTitle($event.author, $event.title)"></app-search-form>
   </section>
 
-  <!-- Poem Selection-->
+  <!-- Poem Selection List-->
   <section *ngIf="!selectedPoem && !isSearchView" class="poem-view scrollable-content">
     <app-poetry-list [poems]="poems" (selectPoem)="selectPoem($event)"></app-poetry-list>
   </section>
 
   <!-- Poem View -->
-  <section *ngIf="selectedPoem" class="poem-view">
+  <section *ngIf="selectedPoem" class="poem-view scrollable-content">
     <app-poem-detail [poem]="selectedPoem">></app-poem-detail>
   </section>
 

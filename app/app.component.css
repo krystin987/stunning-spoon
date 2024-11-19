@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  background: url('./grayscale-watercolor-leaf-background.jpg') no-repeat center center fixed;
+  background: url('../grayscale-watercolor-leaf-background.jpg') no-repeat center center fixed;
   background-size: cover;
   padding: 1rem;
   box-sizing: border-box;
@@ -28,22 +28,12 @@
   margin: 0 auto;
 }
 
-/* Logo */
-.app-logo {
-  width: 50px;
-  height: auto;
-  margin-right: 1rem;
-  filter: invert(1);
-}
-
-/* App title */
 .app-title {
   font-size: 2.5rem;
   font-weight: bold;
   margin: 0;
 }
 
-/* App tagline */
 .app-tagline {
   font-size: 1.2rem;
   margin: 0.25rem 0 0;
@@ -57,38 +47,4 @@
   width: 100vw;
   height: 100vh;
   z-index: -1;
-}
-
-/* Responsive Design */
-@media (min-width: 768px) {
-  .header-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .app-logo {
-    width: 60px;
-  }
-
-  .app-title {
-    font-size: 2.5rem;
-  }
-
-  .app-tagline {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-title {
-    font-size: 1.5rem;
-  }
-
-  .app-tagline {
-    font-size: 0.9rem;
-  }
-
-  .app-logo {
-    width: 30px;
-  }
 }

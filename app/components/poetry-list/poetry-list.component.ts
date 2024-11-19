@@ -4,20 +4,15 @@ import { Poem } from '../../models/poem';
 
 @Component({
   selector: 'app-poetry-list',
-  standalone: true,
   imports: [
     NgForOf
   ],
   templateUrl: './poetry-list.component.html',
-  styleUrl: './poetry-list.component.css'
+  standalone: true,
+  styleUrls: ['./poetry-list.component.css', "../../assets/styles/shared.css"]
 })
 
 export class PoetryListComponent {
   @Input() poems: Poem[] = [];
   @Output() selectPoem = new EventEmitter<Poem>();
-
-  isSearchView: boolean = true;
-  errorMessage: string | undefined;
-  private loggingService: any;
-
 }

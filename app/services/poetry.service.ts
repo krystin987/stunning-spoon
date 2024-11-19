@@ -13,6 +13,7 @@ export class PoetryService {
   constructor(private http: HttpClient) { }
 
   getPoems(author: string | null, title: string | null): Observable<any> {
+
     if (!author && !title) {
       return throwError(() => new Error('Both author and title cannot be empty.'));
     }
@@ -47,7 +48,6 @@ export class PoetryService {
       catchError(this.handleError)
     );
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.status !== 200) {

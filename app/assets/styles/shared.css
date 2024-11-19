@@ -1,6 +1,11 @@
-/* Shared Section Styling */
+/*some styles consolidated but outside of main app*/
 section {
   margin: 1rem 0;
+}
+
+.search-form, .poetry-component, .selection-view, .header-container {
+  display: flex;
+  flex-direction: column;
 }
 
 /*input & button */
@@ -38,23 +43,7 @@ button:hover {
   background-color: #1a5d87;
 }
 
-/* Error Message Styling */
 .error-message {
   color: red;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  input[type="text"],
-  button {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-}
-
-@media (max-width: 480px) {
-  input[type="text"],
-  button {
-    font-size: 0.8rem;
-  }
-}

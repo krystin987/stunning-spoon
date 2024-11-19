@@ -4,10 +4,10 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
-  standalone: true,
   imports: [
     FormsModule
   ],
+  standalone: true,
   styleUrls: ['./search-form.component.css', '../../assets/styles/shared.css']
 })
 

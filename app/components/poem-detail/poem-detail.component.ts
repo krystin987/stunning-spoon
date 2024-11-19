@@ -1,18 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import { PoetryService } from '../../services/poetry.service';
 import { Poem } from '../../models/poem';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-poem-detail',
-  standalone: true,
   imports: [
     NgForOf,
     NgIf
   ],
   templateUrl: './poem-detail.component.html',
-  styleUrl: './poem-detail.component.css'
+  standalone: true,
+  styleUrls: ['./poem-detail.component.css', "../../assets/styles/shared.css"]
 })
 export class PoemDetailComponent implements OnInit {
   @Input() poem!: Poem | null;
@@ -21,11 +22,13 @@ export class PoemDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private poetryService: PoetryService,
-    private router: Router
-  ) {}
+    private stateService: StateService
+) {}
 
   ngOnInit(): void {
-    const poemId = this.route.snapshot.paramMap.get('id'); // Get poem ID from the route
+    // Set the view state to false for the poem detail view, or lines - the actual poem
+    this.stateService.setIsSearchView(false);
+    const poemId = this.route.snapshot.paramMap.get('id');
     if (poemId) {
       this.poetryService.getPoemById(poemId).subscribe({
         next: (poem: Poem | null) => {
@@ -38,9 +41,4 @@ export class PoemDetailComponent implements OnInit {
     }
   }
 
-
-  // Go back to the poem list
-  goBack(): void {
-    this.router.navigate(['/']);
-  }
 }

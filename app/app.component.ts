@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { PoetryComponent } from './components/poetry-component/poetry.component';
-import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, PoetryComponent, NgOptimizedImage],
+  imports: [PoetryComponent],
   template: `
     <main>
       <header class="app-header">
         <div class="header-container">
           <div class="header-text">
             <h1 class="app-title">Poetry Viewer</h1>
-            <p class="app-tagline">Discover and explore timeless poetry</p>
-
+            <p class="app-tagline">Discover and Explore Timeless Poetry</p>
           </div>
         </div>
       </header>
@@ -23,6 +19,7 @@ import {NgOptimizedImage} from '@angular/common';
       </section>
     </main>
   `,
+  standalone: true,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
