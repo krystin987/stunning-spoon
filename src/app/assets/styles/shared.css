@@ -1,7 +1,6 @@
-.search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* Shared Section Styling */
+section {
+  margin: 1rem 0;
 }
 
 /*input & button */
@@ -24,8 +23,8 @@ input[type="text"]:focus {
 }
 
 input[type="text"]::placeholder {
-  color: #aaa; /* Lighter color for placeholder */
-  font-style: italic; /* Make placeholder italic */
+  color: #aaa;
+  font-style: italic;
 }
 
 button {
@@ -39,12 +38,23 @@ button:hover {
   background-color: #1a5d87;
 }
 
-/*sections*/
-
-section {
-  margin: 1rem 0;
-}
-
+/* Error Message Styling */
 .error-message {
   color: red;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  input[type="text"],
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  input[type="text"],
+  button {
+    font-size: 0.8rem;
+  }
 }
