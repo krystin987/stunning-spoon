@@ -3,6 +3,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import { PoetryService } from '../../services/poetry.service';
 import { Poem } from '../../models/poem';
 import {ActivatedRoute, Router} from '@angular/router';
+import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-poem-detail',
@@ -21,10 +22,13 @@ export class PoemDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private poetryService: PoetryService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private stateService: StateService
+) {}
 
   ngOnInit(): void {
+    // Set the view state to false because we are now in the poem detail view
+    this.stateService.setIsSearchView(false);
     const poemId = this.route.snapshot.paramMap.get('id'); // Get poem ID from the route
     if (poemId) {
       this.poetryService.getPoemById(poemId).subscribe({
