@@ -1,28 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {JsonPipe, NgForOf, NgIf} from '@angular/common';
+import { NgIf} from '@angular/common';
 import { PoetryService } from '../../services/poetry.service';
 import { LoggingService } from '../../services/logging.service';
-import {FormsModule} from '@angular/forms';
-import {Poem} from '../../models/poem';
-import {SearchFormComponent} from '../search-form/search-form.component';
-import {PoetryListComponent} from '../poetry-list/poetry-list.component';
-import {PoemDetailComponent} from '../poem-detail/poem-detail.component';
+import { FormsModule } from '@angular/forms';
+import { Poem} from '../../models/poem';
+import { SearchFormComponent } from '../search-form/search-form.component';
+import { PoetryListComponent } from '../poetry-list/poetry-list.component';
+import { PoemDetailComponent } from '../poem-detail/poem-detail.component';
 import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-poetry',
-  standalone: true,
   imports: [
     NgIf,
-    JsonPipe,
-    NgForOf,
     FormsModule,
     SearchFormComponent,
     PoetryListComponent,
     PoemDetailComponent
   ],
   templateUrl: './poetry.component.html',
-  styleUrls:  ['./poetry.component.css', '../../assets/styles/shared.css']
+  standalone: true,
+  styleUrls: ['./poetry.component.css', '../../assets/styles/shared.css']
 })
 
 export class PoetryComponent implements OnInit {

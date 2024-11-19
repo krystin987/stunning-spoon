@@ -7,12 +7,12 @@ import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-poem-detail',
-  standalone: true,
   imports: [
     NgForOf,
     NgIf
   ],
   templateUrl: './poem-detail.component.html',
+  standalone: true,
   styleUrls: ['./poem-detail.component.css', "../../assets/styles/shared.css"]
 })
 export class PoemDetailComponent implements OnInit {

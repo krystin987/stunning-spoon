@@ -4,11 +4,11 @@ import { Poem } from '../../models/poem';
 
 @Component({
   selector: 'app-poetry-list',
-  standalone: true,
   imports: [
     NgForOf
   ],
   templateUrl: './poetry-list.component.html',
+  standalone: true,
   styleUrls: ['./poetry-list.component.css', "../../assets/styles/shared.css"]
 })
 
