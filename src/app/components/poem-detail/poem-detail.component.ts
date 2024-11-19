@@ -13,7 +13,7 @@ import { StateService } from '../../services/state.service';
     NgIf
   ],
   templateUrl: './poem-detail.component.html',
-  styleUrl: './poem-detail.component.css'
+  styleUrls: ['./poem-detail.component.css', "../../assets/styles/shared.css"]
 })
 export class PoemDetailComponent implements OnInit {
   @Input() poem!: Poem | null;

@@ -9,7 +9,7 @@ import { Poem } from '../../models/poem';
     NgForOf
   ],
   templateUrl: './poetry-list.component.html',
-  styleUrl: './poetry-list.component.css'
+  styleUrls: ['./poetry-list.component.css', "../../assets/styles/shared.css"]
 })
 
 export class PoetryListComponent {
