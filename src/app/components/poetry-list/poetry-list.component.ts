@@ -15,9 +15,4 @@ import { Poem } from '../../models/poem';
 export class PoetryListComponent {
   @Input() poems: Poem[] = [];
   @Output() selectPoem = new EventEmitter<Poem>();
-
-  isSearchView: boolean = true;
-  errorMessage: string | undefined;
-  private loggingService: any;
-
 }

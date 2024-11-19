@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {JsonPipe, NgForOf, NgIf} from '@angular/common';
 import { PoetryService } from '../../services/poetry.service';
 import { LoggingService } from '../../services/logging.service';
@@ -25,10 +25,10 @@ import { StateService } from '../../services/state.service';
   styleUrls:  ['./poetry.component.css', '../../assets/styles/shared.css']
 })
 
-export class PoetryComponent {
+export class PoetryComponent implements OnInit {
   errorMessage: string | undefined;
   poems: Poem[] = [];
-  selectedPoem: any = null; // Store the selected poem
+  selectedPoem: any = null;
   isSearchView: boolean = true;
 
   constructor(
@@ -37,16 +37,11 @@ export class PoetryComponent {
   private stateService: StateService
   ) {}
 
-  ngOnInit(): void {
-    // Get the current state of isSearchView from the service
-    this.stateService.isSearchView$.subscribe(isSearchView => {
-      this.isSearchView = isSearchView;
-    });
-  }
-
+  // fetch using both fields or only one or the other
   fetchByAuthorAndTitle(author: string, title: string): void {
-    this.errorMessage = ''; // clear any previous error, if there exist more in the future
+    this.errorMessage = '';
 
+    // clean up input strings
     author = author ? author.trim().replace(/[^a-zA-Z0-9\s]/g, '') : '';
     title = title ? title.trim().replace(/[^a-zA-Z0-9\s]/g, '') : '';
 
@@ -73,6 +68,13 @@ export class PoetryComponent {
 
   selectPoem(poem: Poem): void {
     this.selectedPoem = poem;
+  }
+
+  ngOnInit(): void {
+    // Get the current state of isSearchView from the service
+    this.stateService.isSearchView$.subscribe(isSearchView => {
+      this.isSearchView = isSearchView;
+    });
   }
 
   handleBack(): void {

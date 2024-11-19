@@ -1,0 +1,70 @@
+.poetry-component {
+  background: #4E4187;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  margin: auto;
+  color: white;
+  width: 100%;
+  max-width: 600px;
+  min-width: 600px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+header h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.back-button-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #4E4187;
+  width: 100%;
+  box-sizing: border-box;
+  height: 3vh;
+}
+
+.scrollable-content {
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.message-section p{
+  color: #ECC30B;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.message-section {
+  margin-bottom: 1rem;
+  display: flex;
+  background: #4E4187;
+}
+
+.search-message {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .poetry-component {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .poetry-component {
+    padding: 0.8rem;
+    max-width: 100%;
+    min-width: 100%;
+  }
+}

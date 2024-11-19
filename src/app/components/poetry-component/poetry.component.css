@@ -1,6 +1,4 @@
 .poetry-component {
-  display: flex;
-  flex-direction: column;
   background: #4E4187;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -16,7 +14,6 @@
   position: relative;
 }
 
-/* Header */
 header h2 {
   text-align: center;
   margin: 0;
@@ -46,7 +43,6 @@ header h2 {
 
 .message-section {
   margin-bottom: 1rem;
-  /*height: 4rem;*/
   display: flex;
   background: #4E4187;
 }
