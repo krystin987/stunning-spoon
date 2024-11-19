@@ -79,5 +79,5 @@ The application should now be available at http://localhost:4200/.
 4. **Advanced Search Filters**: Add advanced filtering capabilities, such as filtering by genre, poem length, or popularity. 
 5. **Internationalization (i18n)**: Support multiple languages for a broader audience by implementing Angular's i18n features.
 
-##License
+## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
