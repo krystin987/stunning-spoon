@@ -6,16 +6,15 @@
   </header>
 
   <!-- Message Section: Back button, Error Message, or Search prompt -->
-  <section class="message-section">
-    <ng-container *ngIf="!isSearchView">
+
+<!--    <ng-container *ngIf="!isSearchView">-->
       <!-- Back button container appears when not in search view -->
-      <div class="back-button-container">
+      <div class="back-button-container" *ngIf="!isSearchView">
         <button (click)="handleBack()">Back</button>
       </div>
-    </ng-container>
-
+<!--    </ng-container>-->
+  <section class="message-section">
     <ng-container *ngIf="errorMessage?.trim()">
-      <!-- Show error message if both author and title are empty -->
       <p class="error-message">{{ errorMessage }}</p>
     </ng-container>
 
@@ -36,7 +35,7 @@
   </section>
 
   <!-- Poem View -->
-  <section *ngIf="selectedPoem" class="poem-view">
+  <section *ngIf="selectedPoem" class="poem-view scrollable-content">
     <app-poem-detail [poem]="selectedPoem">></app-poem-detail>
   </section>
 

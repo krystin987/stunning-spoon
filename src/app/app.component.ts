@@ -14,7 +14,6 @@ import {NgOptimizedImage} from '@angular/common';
           <div class="header-text">
             <h1 class="app-title">Poetry Viewer</h1>
             <p class="app-tagline">Discover and explore timeless poetry</p>
-
           </div>
         </div>
       </header>

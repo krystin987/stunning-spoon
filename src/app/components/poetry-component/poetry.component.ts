@@ -7,6 +7,7 @@ import {Poem} from '../../models/poem';
 import {SearchFormComponent} from '../search-form/search-form.component';
 import {PoetryListComponent} from '../poetry-list/poetry-list.component';
 import {PoemDetailComponent} from '../poem-detail/poem-detail.component';
+import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-poetry',
@@ -32,8 +33,16 @@ export class PoetryComponent {
 
   constructor(
     private poetryService: PoetryService,
-    private loggingService: LoggingService
+    private loggingService: LoggingService,
+  private stateService: StateService
   ) {}
+
+  ngOnInit(): void {
+    // Get the current state of isSearchView from the service
+    this.stateService.isSearchView$.subscribe(isSearchView => {
+      this.isSearchView = isSearchView;
+    });
+  }
 
   fetchByAuthorAndTitle(author: string, title: string): void {
     this.errorMessage = ''; // clear any previous error, if there exist more in the future
@@ -51,7 +60,7 @@ export class PoetryComponent {
       next: (data: Poem[]) => {
         if (data.length > 0) {
           this.poems = data;
-          this.isSearchView = false; // Switch to the list view
+          this.stateService.setIsSearchView(false);
         } else {
           this.errorMessage = 'No poems found matching your search. Please try again.';
         }
@@ -72,7 +81,7 @@ export class PoetryComponent {
       this.selectedPoem = null;
     } else {
       // If viewing poems list, go back to the search view
-      this.isSearchView = true;
+      this.stateService.setIsSearchView(true);
       this.poems = [];
     }
   }
