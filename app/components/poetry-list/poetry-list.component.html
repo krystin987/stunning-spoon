@@ -1,5 +1,6 @@
 <section class="selection-view">
   <ul>
+    <!-- Iterate over the poems array and display each poem in the list -->
     <li *ngFor="let poem of poems" (click)="selectPoem.emit(poem)">
       {{ poem.title }} by {{ poem.author }}
     </li>

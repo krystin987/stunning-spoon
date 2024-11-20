@@ -9,6 +9,11 @@ import { PoetryListComponent } from '../poetry-list/poetry-list.component';
 import { PoemDetailComponent } from '../poem-detail/poem-detail.component';
 import { StateService } from '../../services/state.service';
 
+/**
+ * PoetryComponent
+ * This component provides a search interface for users to search poems by author or title, and view the results.
+ * Users can view a list of matching poems, select a poem to see its details, and navigate back to the search or list view.
+ */
 @Component({
   selector: 'app-poetry',
   imports: [
@@ -23,6 +28,11 @@ import { StateService } from '../../services/state.service';
   styleUrls: ['./poetry.component.css', '../../assets/styles/shared.css']
 })
 
+/**
+ * The PoetryComponent uses NgIf for conditional rendering, FormsModule for handling user input,
+ * and child components for search form, poetry list, and poem details.
+ * Consider splitting the styles into smaller files if they become cumbersome for readability.
+ */
 export class PoetryComponent implements OnInit {
   errorMessage: string | undefined;
   poems: Poem[] = [];
@@ -35,11 +45,17 @@ export class PoetryComponent implements OnInit {
   private stateService: StateService
   ) {}
 
-  // fetch using both fields or only one or the other
+  /**
+   * Fetches poems based on the given author and title.
+   * Validates user input to ensure that at least one search parameter is provided.
+   * Handles empty input and trims unnecessary characters.
+   * Logs appropriate messages in case of errors or unsuccessful search.
+   * @param author - The name of the author to search for.
+   * @param title - The title of the poem to search for.
+   */
   fetchByAuthorAndTitle(author: string, title: string): void {
     this.errorMessage = '';
 
-    // clean up input strings
     author = author ? author.trim().replace(/[^a-zA-Z0-9\s]/g, '') : '';
     title = title ? title.trim().replace(/[^a-zA-Z0-9\s]/g, '') : '';
 
@@ -69,23 +85,36 @@ export class PoetryComponent implements OnInit {
     });
   }
 
+  /**
+   * selectPoem
+   * Updates the selectedPoem variable with the poem selected by the user.
+   * @param poem - The poem object selected by the user.
+   */
   selectPoem(poem: Poem): void {
     this.selectedPoem = poem;
   }
 
+  /**
+   * ngOnInit
+   * Lifecycle hook that initializes the component.
+   * Subscribes to the state service to maintain the current search or view state.
+   */
   ngOnInit(): void {
-    // Get the current state of isSearchView from the service
     this.stateService.isSearchView$.subscribe(isSearchView => {
       this.isSearchView = isSearchView;
     });
   }
 
+  /**
+   * handleBack
+   * Handles back navigation logic to switch between different views.
+   * If a poem is selected, it goes back to the poem list view.
+   * If no poem is selected, it navigates back to the search view.
+   */
   handleBack(): void {
     if (this.selectedPoem) {
-      // If viewing poem details, go back to the poems list
       this.selectedPoem = null;
     } else {
-      // If viewing poems list, go back to the search view
       this.stateService.setIsSearchView(true);
       this.poems = [];
     }

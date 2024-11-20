@@ -16,6 +16,11 @@ import { StateService } from '../../services/state.service';
   styleUrls: ['./poem-detail.component.css', "../../assets/styles/shared.css"]
 })
 export class PoemDetailComponent implements OnInit {
+  /**
+   * The poem object to be displayed in the detail view.
+   * It is passed as an input from the parent component.
+   * @type {Poem | null}
+   */
   @Input() poem!: Poem | null;
   errorMessage: string | undefined;
 
@@ -25,8 +30,12 @@ export class PoemDetailComponent implements OnInit {
     private stateService: StateService
 ) {}
 
+  /**
+   * ngOnInit lifecycle hook.
+   * Sets the initial view state and fetches the poem details based on the route parameter.
+   * If a poem ID is present in the route, it will call the PoetryService to fetch the poem details.
+   */
   ngOnInit(): void {
-    // Set the view state to false for the poem detail view, or lines - the actual poem
     this.stateService.setIsSearchView(false);
     const poemId = this.route.snapshot.paramMap.get('id');
     if (poemId) {
