@@ -1,5 +1,7 @@
 # Poetry Application
 
+Explore a hosted version of the application at the following site: <https://krystin987.github.io/stunning-spoon/>
+
 ## Overview
 The Poetry Application is a web-based platform that allows users to search for poems by author or title or both. It leverages Angular as the frontend framework and integrates with a poetry database API for fetching poem data. The application offers a user-friendly interface where users can enter search criteria, browse through poem results, and view the full text of selected poems.
 
