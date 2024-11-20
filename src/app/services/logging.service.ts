@@ -6,6 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class LoggingService {
 
+  /**
+   * Logs an informational message to the console.
+   * Optionally, additional data can be logged.
+   * @param {string} message - The main informational message to be logged.
+   * @param {any} [data] - Optional additional data to be logged with the informational message.
+   */
   info(message: string, data?: any): void {
     console.log('Info:', message);
     if (data) {
@@ -13,6 +19,12 @@ export class LoggingService {
     }
   }
 
+  /**
+   * Logs a warning message to the console.
+   * Optionally, additional data can be logged.
+   * @param {string} message - The warning message to be logged.
+   * @param {any} [data] - Optional additional data to be logged with the warning message.
+   */
   warn(message: string, data?: any): void {
     console.warn('Warning:', message);
     if (data) {
@@ -20,6 +32,12 @@ export class LoggingService {
     }
   }
 
+  /**
+   * Logs an error message to the console.
+   * Optionally, additional data can be logged.
+   * @param {string} message - The error message to be logged.
+   * @param {any} [data] - Optional additional data to be logged with the error message.
+   */
   error(message: string, data?: any): void {
     console.error('Error:', message);
     if (data) {

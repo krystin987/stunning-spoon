@@ -7,10 +7,23 @@ import {Poem} from '../models/poem';
   providedIn: 'root'
 })
 export class PoetryService {
+  /**
+   * Base URL for the poetry database API.
+   * @private
+   * @type {string}
+   */
   private baseUrl = 'https://poetrydb.org';
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Fetches poems based on the provided author and/or title.
+   * Depending on the parameters, it fetches data by author only, title only, or both, and filters the results.
+   * If both author and title are provided, it will perform a forkJoin to fetch both datasets and filter the results to match both.
+   * @param {string | null} author - The author's name to search for.
+   * @param {string | null} title - The title of the poem to search for.
+   * @returns {Observable<any>} - An observable containing the list of poems matching the search criteria.
+   */
   getPoems(author: string | null, title: string | null): Observable<any> {
 
     if (!author && !title) {
@@ -18,7 +31,6 @@ export class PoetryService {
     }
 
     if (author && title) {
-      // Fetch both author and title and filter the results
       return forkJoin({
         authorData: this.http.get<Poem[] | { status: number; reason: string }>(`${this.baseUrl}/author/${author}`).pipe(catchError(this.handleError)),
         titleData: this.http.get<Poem[] | { status: number; reason: string }>(`${this.baseUrl}/title/${title}`).pipe(catchError(this.handleError))
@@ -29,14 +41,12 @@ export class PoetryService {
           const isTitleDataValid = Array.isArray(titleData);
 
           if (isAuthorDataValid && isTitleDataValid) {
-            // Filter poems that match both author and title
             return titleData.filter(poem =>
               authorData.some(authorPoem => authorPoem.title === poem.title)
             );
           } else if (!isAuthorDataValid && !isTitleDataValid) {
             return [];
           } else {
-            // Return only the valid data or an empty array if neither is valid
             return isAuthorDataValid ? authorData : isTitleDataValid ? titleData : [];
           }
         }),
@@ -51,12 +61,24 @@ export class PoetryService {
     }
   }
 
+  /**
+   * Fetches a specific poem by its ID.
+   * @param {string} id - The unique identifier of the poem to fetch.
+   * @returns {Observable<Poem>} - An observable containing the poem details.
+   */
   getPoemById(id: string): Observable<Poem> {
     return this.http.get<Poem>(`${this.baseUrl}/poem/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
+  /**
+   * Handles HTTP errors that occur during API calls.
+   * Logs the error to the console and returns an observable with an appropriate error message.
+   * @private
+   * @param {HttpErrorResponse} error - The error object containing details of the HTTP error.
+   * @returns {Observable<never>} - An observable that throws an error with a user-friendly message.
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.status !== 200) {
       console.error(`Error Status: ${error.status} - ${error.message}`);
